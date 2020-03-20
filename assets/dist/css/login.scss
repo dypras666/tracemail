@@ -1,0 +1,20 @@
+/*
+* @Author: Lampung Media Technology
+* @Date:   2020-01-04 17:59:55
+* @Last Modified by:   Kurniawan
+* @Last Modified time: 2020-01-04 18:00:25
+*/
+
+$bg-color: #1370FB;
+$dot-color: #3882E8;
+
+// Dimensions
+$dot-size: 2px;
+$dot-space: 22px;
+
+
+	background:
+		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+		linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+		$dot-color;
+	background-size: $dot-space $dot-space;
