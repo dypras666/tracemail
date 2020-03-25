@@ -14,6 +14,24 @@ class Admin_model extends CI_Model{
 		$this->db->update('ci_admin', $data);
 		return true;
 	}
+
+	//-------------------------------------------------------------------- CARI DATA
+    public function cari_unit($term='')
+    {
+        $this->db->select('*');
+        $this->db->from('unit');
+        $this->db->like('nama_unit',$term,'both'); 
+        $this->db->or_like('kode_unit',$term,'both'); 
+        $query = $this->db->get();
+        $dpt = $query->result_array();  
+        $data = array();
+        foreach($dpt as $user){
+            $data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+        }
+        $data[] = array("id" => "", "text" => "Semua Data");
+        return $data;
+    }
+
 	//--------------------------------------------------------------------
 	public function change_pwd($data, $id){
 		$this->db->where('admin_id', $id);
@@ -34,6 +52,7 @@ class Admin_model extends CI_Model{
 	{
 		$this->db->from('ci_admin');
 		$this->db->join('ci_admin_roles','ci_admin_roles.admin_role_id=ci_admin.admin_role_id');
+		$this->db->join('unit','unit.id=ci_admin.unit_id');
 		$this->db->where('admin_id',$id);
 		$query=$this->db->get();
 		return $query->row_array();
@@ -104,6 +123,27 @@ function delete($id)
 	$this->db->where('admin_id',$id);
 	$this->db->delete('ci_admin');
 } 
+
+ // DATATABLES
+   public function datatable($select,$table,$join='',$where_array='')
+   {
+    $wh =array();
+    $wh[] = $where_array;
+    $SQL ='select
+            '.$select.'
+            FROM '.$table.'
+                    '.$join;
+  
+    if(count($wh)>0)
+    {
+        $WHERE = implode(' and ',$wh);
+        return $this->datatable->LoadJson($SQL,$WHERE);
+    }
+    else
+    {
+        return $this->datatable->LoadJson($SQL);
+    }
+   }
 
 }
 

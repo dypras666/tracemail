@@ -18,7 +18,7 @@
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
+  <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
@@ -28,7 +28,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>2</h3>
+                <h3><?= $c_surat_masuk?></h3>
 
                 <p>Surat Masuk</p>
               </div>
@@ -43,27 +43,12 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>2</h3>
+                <h3><?= $c_surat_keluar?></h3>
 
                 <p>Surat Keluar</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer"><?= trans('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>1</h3>
-
-                <p>Arsip Surat</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
               </div>
               <a href="#" class="small-box-footer"><?= trans('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -74,7 +59,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>2</h3>
+                <h3><?= $c_surat_blm?></h3>
 
                 <p>Surat Belum Diproses</p>
               </div>
@@ -85,6 +70,23 @@
             </div>
           </div>
           <!-- ./col -->
+            <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?= $c_surat_semua?></h3>
+
+                <p>Keseluruhan Surat</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer"><?= trans('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+
           <div class="col-12">
      <div class="card">
       <div class="card-header">

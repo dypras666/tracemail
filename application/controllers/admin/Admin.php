@@ -23,7 +23,7 @@ class Admin extends MY_Controller
 		
 		$data['title'] = 'Admin List';
 
-		$this->load->view('admin/includes/_header');
+		$this->load->view('admin/includes/_header',$data);
 		$this->load->view('admin/admin/index', $data);
 		$this->load->view('admin/includes/_footer');
 	}
@@ -57,13 +57,14 @@ class Admin extends MY_Controller
 		$this->rbac->check_operation_access(); // check opration permission
 
 		$data['admin_roles']=$this->admin->get_admin_roles();
-
+		$data['title']		= "Tambah Admin";
 		if($this->input->post('submit')){
 				$this->form_validation->set_rules('username', 'Username', 'trim|alpha_numeric|is_unique[ci_admin.username]|required');
 				$this->form_validation->set_rules('firstname', 'Firstname', 'trim|required');
 				$this->form_validation->set_rules('lastname', 'Lastname', 'trim|required');
 				$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
 				$this->form_validation->set_rules('mobile_no', 'Number', 'trim|required');
+				$this->form_validation->set_rules('unit', 'Unit', 'trim|required');
 				$this->form_validation->set_rules('password', 'Password', 'trim|required');
 				$this->form_validation->set_rules('role', 'Role', 'trim|required');
 				if ($this->form_validation->run() == FALSE) {
@@ -81,6 +82,7 @@ class Admin extends MY_Controller
 						'lastname' => $this->input->post('lastname'),
 						'email' => $this->input->post('email'),
 						'mobile_no' => $this->input->post('mobile_no'),
+						'unit_id' => $this->input->post('unit'),
 						'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
 						'is_active' => 1,
 						'created_at' => date('Y-m-d : h:m:s'),
@@ -119,6 +121,7 @@ class Admin extends MY_Controller
 			$this->form_validation->set_rules('lastname', 'Lastname', 'trim|required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
 			$this->form_validation->set_rules('mobile_no', 'Number', 'trim|required');
+			$this->form_validation->set_rules('unit', 'Unit', 'trim|required');
 			$this->form_validation->set_rules('password', 'Password', 'trim|min_length[5]');
 			$this->form_validation->set_rules('role', 'Role', 'trim|required');
 			if ($this->form_validation->run() == FALSE) {
@@ -136,6 +139,7 @@ class Admin extends MY_Controller
 					'lastname' => $this->input->post('lastname'),
 					'email' => $this->input->post('email'),
 					'mobile_no' => $this->input->post('mobile_no'),
+					'unit_id' => $this->input->post('unit'),
 					'is_active' => 1,
 					'updated_at' => date('Y-m-d : h:m:s'),
 				);
@@ -159,9 +163,9 @@ class Admin extends MY_Controller
 			redirect('admin/admin');
 		}
 		else{
-			$data['admin'] = $this->admin->get_admin_by_id($id);
-			
-			$this->load->view('admin/includes/_header');
+			$data['admin'] = $this->admin->get_admin_by_id($id); 
+			$data['title'] = "Edit  " .$data['admin']['firstname'];
+			$this->load->view('admin/includes/_header',$data);
 			$this->load->view('admin/admin/edit', $data);
 			$this->load->view('admin/includes/_footer');
 		}		
@@ -181,18 +185,56 @@ class Admin extends MY_Controller
     }
 
     //------------------------------------------------------------
-	function delete($id=''){
+	function delete(){
 	   
 		$this->rbac->check_operation_access(); // check opration permission
-
-		$this->admin->delete($id);
-
-		// Activity Log 
-		$this->activity_model->add_log(6);
-
-		$this->session->set_flashdata('success','User has been Deleted Successfully.');	
-		redirect('admin/admin');
+		$id = $this->input->post('id');
+		return $this->admin->delete($id);
+ 
 	}
+ 	//  cari data
+    public function cari_unit()
+	{  
+		$value    	= $this->input->post('searchTerm');
+       	$produk   	= $this->admin->cari_unit($value);
+       	echo json_encode($produk);
+	}
+    //------------------------------------------------------------
+	 public function dt_admin()
+    {
+    	$mail =null;
+        $fetch_data = $this->admin->datatable('*','ci_admin',
+        	' left join ci_admin_roles on ci_admin_roles.admin_role_id=ci_admin.admin_role_id
+        		left join unit on unit.id=ci_admin.unit_id
+        	',
+        	'is_supper="0" ');
+		$data = array();
+		$no=0;		
+        if(isset($_GET['start'])) { $no = $_GET['start']; }
+        foreach ($fetch_data['data']  as $row) 
+		{
+		$status = ($row['is_active'] == 1)? 'checked': '';
+		$no++; 
+			$data[]= array(
+				$no,  
+				$row['firstname'],     
+				$row['username'],     
+				$row['mobile_no'],     
+				$row['kode_unit'],     
+				$row['admin_role_title'],     
+				"<input class='tgl tgl-ios tgl_checkbox' 
+                    data-id=".$row['admin_id']." 
+                    id='cb_".$row['admin_id']."' 
+                    type='checkbox' ".$status."  />
+                    <label class='tgl-btn' for='cb_".$row['admin_id']."'></label>", 
+				'<div class="btn-group">				 
+				  <a  href="'.base_url().'admin/edit/'.$row['admin_id'].'"   class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>			 
+				  <a  data-id="'.$row['admin_id'].'"   class="btn btn-sm btn-danger text-white delete"><i class="fa fa-trash"></i></a></div>',
+			);
+        }
+		$fetch_data['data']=$data;
+        echo json_encode($fetch_data);	
+    }
 	
 }
 

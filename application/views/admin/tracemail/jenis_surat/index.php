@@ -3,7 +3,7 @@
  * @Author: Lampung Media Technology
  * @Date:   2020-01-04 14:21:41
  * @Last Modified by:   Kurniawan
- * @Last Modified time: 2020-01-05 09:31:53
+ * @Last Modified time: 2020-03-24 20:50:55
  */ 
 ?>
 <!-- DataTables -->
@@ -72,7 +72,7 @@
                <div class="card">
                 <div class="card-header">
                   <div class="d-inline-block">
-                    <h3 class="card-title"><i class="fa fa-university"></i>&nbsp; Data Unit</h3>
+                    <h3 class="card-title"><i class="fa fa-university"></i>&nbsp; Data Jenis Surat</h3>
                   </div> 
                 </div>
                 <div class="card-body table-responsive">

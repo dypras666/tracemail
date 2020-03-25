@@ -13,33 +13,15 @@ class Dashboard extends My_Controller {
 	//--------------------------------------------------------------------------
 	public function index(){  
 		$data['title'] = 'Home';
-
+		$data['c_surat_masuk']	 = $this->auto->count_data('mailbox',array('tipe_surat' => "surat-masuk"));
+		$data['c_surat_keluar']	 = $this->auto->count_data('mailbox',array('tipe_surat' => "surat-keluar"));
+		$data['c_surat_blm']	 = $this->auto->count_data('mailbox',array('tipe_surat' => "surat-masuk", 'status' => "belum"));
+		$data['c_surat_semua']	 = $this->auto->count_data('mailbox');
 		$this->load->view('admin/includes/_header', $data);
     	$this->load->view('admin/dashboard/index', $data);
     	$this->load->view('admin/includes/_footer');
 	}
-	public function json_list_lokasi()
-	{
-		$lokasi = $this->auto->getAllData('ci_tempat');
-		$data = array();
-		foreach ($lokasi as $row) {
-			$data[] = array(				
-				'id_tempat'	=> $row->id_tempat,
-				'lokasi' =>  $row->lokasi,
-				'nama_tempat' =>  $row->nama_tempat,
-				'lat' => $row->lat, 
-				'lng' => $row->lng,
-				'map_image_url' =>  'http://gis.saktiputra.com/assets/images/tempat/'.$row->gambar,
-				'rate' => 'Laporan kerusakan | 7',
-				'name_point' =>  $row->nama_tempat,
-				'get_directions_start_address' => $row->lokasi, 
-				'url_point' => base_url()
-
-			);
-		}
-		 
-		return $data ;
-	} 
+	
 
 	 
 	

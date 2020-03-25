@@ -208,10 +208,12 @@ class Auto_model extends CI_Model
         return false;
    }
    
-   public function count_data($db,$where)
+   public function count_data($db,$where="")
    {
 	   $this->db->select('*');
+	   if (!empty($where)):
 	   $this->db->where($where);
+	   endif;
 	   $query = $this->db->get($db);
 	   return $count = $query->num_rows();
    }

@@ -15,6 +15,7 @@ $lang['admin']  							= "Admin";
 $lang['tracemail']  						= "Tracemail";
 	$lang['tracemail_dashboard']            = "Dashboard Tracemail";
 	$lang['tracemail_inbox']                = "Surat Masuk";
+	$lang['tracemail_disposisi']            = "Disposisi";
 		$lang['tmail_noagenda']         	= "No Agenda";
 		$lang['tmail_nosurat']         		= "No Surat";
 		$lang['tmail_subject']         		= "Perihal";
@@ -31,17 +32,23 @@ $lang['tracemail']  						= "Tracemail";
 	$lang['tracemail_archive']              = "Arsip Surat";
 	$lang['tracemail_jenis_surat']          = "Jenis Surat";
 	$lang['tracemail_unit']          		= "Unit";
- 
+	$lang['tracemail_status']          		= "Status Disposisi";
 
-	// GIS
-$lang['gis']  								= "GIS";
-	$lang['gis_dashboard']                  = "Dashboard GIS";
-	$lang['gis_album']                      = "Album";
-	$lang['gis_galeri']                     = "Galeri";
-	$lang['gis_lokasi_list']                = "Data Lampu";  
-	$lang['gis_laporan']                   	= "Laporan Kerusakan";  
-	$lang['gis_kecamatan']                  = "Kecamatan";  
-	$lang['gis_desa']                     	= "Desa";  
+ 	// Tracemail user
+	$lang['tmail']							= "Tracemail";
+	$lang['tmail_inbox']					= "Surat Masuk";
+	$lang['tmail_outbox']					= "Surat Keluar";
+	$lang['tmail_archive']					= "Arsip Surat";
+	$lang['tmail_draft']					= "Draft Surat";
+	// Pengaturan Tracemail
+	$lang['tmail_sett']						= "Pengaturan Unit";
+	$lang['tmail_sett_unit']			    = "Edit Unit";
+	$lang['tmail_sett_pegawai']				= "Pegawai";
+	$lang['tmail_sett_notifikasi']			= "Notifikasi";
+
+
+
+  
 
 $lang['profile']                            = "Profil";
 	$lang['view_profile']                   = "Lihat Profil";
@@ -67,19 +74,19 @@ $lang['i_forgot_my_password']               = "I forgot my password";
 $lang['register_new_membership']            = "Register a new membership";
 
 //  Register
-$lang['firstname']                          = "First Name";
-$lang['lastname']                           = "Last Name";
+$lang['firstname']                          = "Nama Depan";
+$lang['lastname']                           = "Nama Belakang";
 $lang['email']                              = "Email Address";
-$lang['confirm']                            = "Confirm";
-$lang['i_agree_to_the']                     = "I agree to the";
+$lang['confirm']                            = "Konfirmasi";
+$lang['i_agree_to_the']                     = "Saya setuju ";
 $lang['terms']                              = "Terms";
-$lang['register']                          	= "Register";
-$lang['i_already_have_membership']        	= "I already have a membership";
+$lang['register']                          	= "Daftar";
+$lang['i_already_have_membership']        	= "Sudah punya akun?";
 
 // Forgot Password
-$lang['forgot_password']                    = "Forget Password";
-$lang['submit']                    			= "Submit";
-$lang['you_remember_password']              = "You remember Password? Sign In";
+$lang['forgot_password']                    = "Lupa Password";
+$lang['submit']                    			= "Kirim";
+$lang['you_remember_password']              = "Ingat password anda? Login";
 
 // Reset Password
 $lang['reset_password']                    	= "Reset Password";
@@ -106,9 +113,9 @@ $lang['add_item']                   		= "Add Item";
 $lang['calendar']                   		= "Calendar";
 
 // Admin
-$lang['mobile_no']                 			= "Mobile No";
-$lang['select_admin_role']                 	= "Select Admin Role";
-$lang['select_role']                 		= "Select Role";
+$lang['mobile_no']                 			= "Nomor HP (Whatsapp)";
+$lang['select_admin_role']                 	= "Pilih Admin Role";
+$lang['select_role']                 		= "Pilih Role";
 $lang['add_admin']                 			= "Add Admin";
 $lang['edit_admin']                 		= "Edit Admin";
 $lang['all_admin_types']                 	= "Add Admin Types";
@@ -120,7 +127,7 @@ $lang['id']                			 		= "ID";
 $lang['user']                 				= "User";
 $lang['role']                 				= "Role";
 $lang['status']                 			= "Status";
-$lang['select_status']                 		= "Select Status";
+$lang['select_status']                 		= "Pilih Status";
 $lang['action']                 			= "Action";
 
 //  Profile

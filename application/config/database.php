@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.2.253',
+	'hostname' => '103.213.116.92',
 	'username' => 'root',
-	'password' => 'e24c543deeb42d1f',
+	'password' => 'masuk123@321',
 	'database' => 'tracemail',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
